@@ -13,10 +13,10 @@
 				]);
 			var options = {
 				title: 'Occurrence of Earthquakes by Magnitude',
-				vAxis: {title: 'Magnitude'},
-				hAxis: {title: 'Occurrences'},
+				vAxis: {title: 'Occurrences'},
+				hAxis: {title: 'Magnitude'},
 				width: 1200,
-				legend: { position: 'bottom' }
+				legend: { position: 'side' }
 			};
 			var chart = new google.visualization.LineChart(document.getElementById('line_chart'));
 			chart.draw(data, options);
