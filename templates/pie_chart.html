@@ -16,7 +16,14 @@
 				width: 1200,
 				is3D: true,
 				sliceVisibilityThreshold: 0,
-				legend: 'labeled'
+				legend: {
+        			position: 'labeled',
+        			labeledValueText: 'both',
+        			textStyle: {
+            		color: 'blue',
+            		fontSize: 14
+        			}
+        		}
 			};
 			var chart = new google.visualization.PieChart(document.getElementById('pie_chart'));
 			chart.draw(data, options);
