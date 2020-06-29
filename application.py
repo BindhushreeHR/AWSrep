@@ -47,7 +47,8 @@ def bar_chart():
 
 @application.route('/scatter_chart', methods=["POST"])
 def scatter_chart():
-	sql ='SELECT mag, depth FROM quake_data order by "time1" DESC limit 100'
+	numlimit = request.form['numlimit']
+	sql ='SELECT mag, depth FROM quake_data order by "time1" DESC limit \''+numlimit+'\''
 	cur = conn.cursor()
 	cur.execute(sql)
 
