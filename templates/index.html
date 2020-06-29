@@ -2,27 +2,33 @@
 <h1>1001699836</h1>
 <br>
 
-<h1>1) Pie Chart</h1>
+<h1>5) Partition (Bar Chart) </h1>
+<form action="barq_chart" method="post">
+    <h4>Number of partitions</h4> 
+    <input type = "number" name = "partition" value = "">
+    <h4>year</h4> 
+    <input type = "number" name = "year" value = "">
+
+ 
+
+    <input type="submit" name="line_chart_submit">
+</form>
+<br>
+
+<h1>6) Pie Chart</h1>
 <form action="pie_chart" method="post">
-	<input type="submit" name="pie_chart_submit">
-</form>
-<br>
-
-<h1>2) Bar Chart</h1>
-<form action="bar_chart" method="post">
-	<input type="submit" name="histogram_submit">
-</form>
-<br>
-
-<h1>3) Scatter Chart</h1>
-<form action="scatter_chart" method="post">
-	Limit :<input type="text" name="numlimit">
+	Population :<input type="text" name="pop">
+	Year :<input type="text" name="year">
 	<input type="submit" name="prob_3_submit" value="Submit">
 </form>
 <br>
 
-<h1>4) Line chart</h1>
-<form action="line_chart" method="post">
-	<input type="submit" name="histogram_submit">
+<h1>7) Scatter Chart</h1>
+<form action="scatter_chart" method="post">
+	Year1 :<input type="text" name="year1">
+	Year2 :<input type="text" name="year2">
+	State Name :<input type="text" name="name">
+	<input type="submit" name="prob_3_submit" value="Submit">
 </form>
+<br>
 <br>

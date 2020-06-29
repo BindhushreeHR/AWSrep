@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, url_for
-from awsdb import conn
+from awsdb import connect
 import os, json, datetime, random
 import numpy as np
 from sklearn.cluster import KMeans
@@ -26,8 +26,47 @@ def line_chart():
 	return render_template('line_chart.html', result=cur.fetchall())
 
 
+@application.route('/barq_chart', methods=["POST"])
+def barq_chart():
+    partition = request.form["partition"]
+    year = request.form["year"]
+    year_s = "y"+str(year)
+    sql1 = "select MAX({}) from sp;".format(year_s)
+    cursor = connect.cursor()
+    cursor.execute(sql1)
+    s = cursor.fetchall()
+    print(round(float(s[0][0]),-3))
+    max_pop = int(round(float(s[0][0]),-3))
+    incr = int(max_pop / int(partition))
+    print(incr)
+   
+    sql2 = """select t.ranges as magnitudes, count(*) as occurences from (
+        select case"""
+           
+    sql3 = """        else -1 end as ranges
+        from sp) t
+    group by t.ranges order by magnitudes;"""
+   
+   
+    sql4 = ""
+    x = 0
+    for i in range(0, max_pop, incr):
+        sql4 = sql4 + " when {} >= {} and {} < {} then {}".format(year_s,i,year_s, i+incr, x )
+        x = x+incr
+       
+    sql = sql2 + sql4 + sql3
+   
+    print(sql)
+   
+    cursor = connect.cursor()
+    cursor.execute(sql)
+   
+    return render_template('barq_chart.html', result=cursor.fetchall(), inr = incr)
+    
 @application.route('/pie_chart', methods=["POST"])
 def pie_chart():
+	year = request.form['year']
+	pop = request.form['pop'] * 100000
 	sql ="select t.ranges as magnitudes, count(*) as occurences from (select case when mag >= 0 and mag < 1 then 0 when mag >= 1 and mag < 2 then 1 when mag >= 2 and mag < 3 then 2 when mag >= 3 and mag < 4 then 3 when mag >= 4 and mag < 5 then 4 when mag >= 5 and mag < 6 then 5 when mag >= 6 and mag < 7 then 6 when mag >= 7 and mag < 8 then 7 when mag >= 8 and mag < 9 then 8 when mag >= 9 and mag < 10 then 9 else -1 end as ranges from database1.quake_data) t group by t.ranges order by magnitudes;"
 	cur = conn.cursor()
 	cur.execute(sql)
@@ -36,23 +75,57 @@ def pie_chart():
 	#cur.execute(sql)
 
 	return render_template('pie_chart.html', result=cur.fetchall())
-	
-@application.route('/bar_chart', methods=["POST"])
-def bar_chart():
+
+# @application.route('/pie_chart', methods=["POST"])
+# def pie_chart():
+# 	sql ="select t.ranges as magnitudes, count(*) as occurences from (select case when mag >= 0 and mag < 1 then 0 when mag >= 1 and mag < 2 then 1 when mag >= 2 and mag < 3 then 2 when mag >= 3 and mag < 4 then 3 when mag >= 4 and mag < 5 then 4 when mag >= 5 and mag < 6 then 5 when mag >= 6 and mag < 7 then 6 when mag >= 7 and mag < 8 then 7 when mag >= 8 and mag < 9 then 8 when mag >= 9 and mag < 10 then 9 else -1 end as ranges from database1.quake_data) t group by t.ranges order by magnitudes;"
+# 	cur = conn.cursor()
+# 	cur.execute(sql)
+# 	#res = cur.fetchall()
+# 	
+# 	#cur.execute(sql)
+# 
+# 	return render_template('pie_chart.html', result=cur.fetchall())
+
+
+@application.route('/partition', methods=["POST"])
+def partition():
+	year = request.form['year']
+	parts = request.form['part']
 	sql ="select t.ranges as magnitudes, count(*) as occurences from (select case when mag >= 0 and mag < 1 then 0 when mag >= 1 and mag < 2 then 1 when mag >= 2 and mag < 3 then 2 when mag >= 3 and mag < 4 then 3 when mag >= 4 and mag < 5 then 4 when mag >= 5 and mag < 6 then 5 when mag >= 6 and mag < 7 then 6 when mag >= 7 and mag < 8 then 7 when mag >= 8 and mag < 9 then 8 when mag >= 9 and mag < 10 then 9 else -1 end as ranges from database1.quake_data) t group by t.ranges order by magnitudes;"
 	cur = conn.cursor()
 	cur.execute(sql)
 
 	return render_template('bar_chart.html', result=cur.fetchall())
+		
+# @application.route('/bar_chart', methods=["POST"])
+# def bar_chart():
+# 	sql ="select t.ranges as magnitudes, count(*) as occurences from (select case when mag >= 0 and mag < 1 then 0 when mag >= 1 and mag < 2 then 1 when mag >= 2 and mag < 3 then 2 when mag >= 3 and mag < 4 then 3 when mag >= 4 and mag < 5 then 4 when mag >= 5 and mag < 6 then 5 when mag >= 6 and mag < 7 then 6 when mag >= 7 and mag < 8 then 7 when mag >= 8 and mag < 9 then 8 when mag >= 9 and mag < 10 then 9 else -1 end as ranges from database1.quake_data) t group by t.ranges order by magnitudes;"
+# 	cur = conn.cursor()
+# 	cur.execute(sql)
+# 
+# 	return render_template('bar_chart.html', result=cur.fetchall())
 
 @application.route('/scatter_chart', methods=["POST"])
 def scatter_chart():
-	numlimit = request.form['numlimit']
-	sql ='SELECT mag, depth FROM quake_data order by "time1" DESC limit ' + numlimit + ''
+	year1 = request.form['year1']
+	year2 = request.form['year2']
+	name = request.form['name']
+	sql = 'SELECT * from sp where Name =' +name+ ''
+	
 	cur = conn.cursor()
 	cur.execute(sql)
 
 	return render_template('scatter_chart.html', result=cur.fetchall())
+	
+# @application.route('/scatter_chart', methods=["POST"])
+# def scatter_chart():
+# 	numlimit = request.form['numlimit']
+# 	sql ='SELECT mag, depth FROM quake_data order by "time1" DESC limit ' + numlimit + ''
+# 	cur = conn.cursor()
+# 	cur.execute(sql)
+# 
+# 	return render_template('scatter_chart.html', result=cur.fetchall())
 	
 # @application.route('/scatter_chart', methods=["POST"])
 # def scatter_chart():

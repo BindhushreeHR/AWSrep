@@ -6,4 +6,4 @@ dbname="database1"
 user="bindhushree"
 password="BinMay18!"
 
-conn = pymysql.connect(host, user, password, dbname)
+connect = pymysql.connect(host, user, password, dbname)
