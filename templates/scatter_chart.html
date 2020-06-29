@@ -13,10 +13,10 @@
 				]);
 			var options = {
 				title: 'Earthquakes by Magnitude against Depth',
-				vAxis: {title: 'Magnitude'},
-				hAxis: {title: 'Depth'},
+				vAxis: {title: 'Depth'},
+				hAxis: {title: 'Magnitude'},
 				width: 1200,
-				legend: { position: 'bottom' }
+				legend: { position: 'side' }
 			};
 			var chart = new google.visualization.ScatterChart(document.getElementById('scatter_chart'));
 			chart.draw(data, options);

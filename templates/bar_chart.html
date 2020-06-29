@@ -6,9 +6,9 @@
 		google.charts.setOnLoadCallback(drawChart);
 		function drawChart() {
 			var data = google.visualization.arrayToDataTable([
-				['Magnitude', 'Occurrences'],
+				['Magnitude', 'Occurrences', { role: 'annotation' }],
 				{% for entry in result %}
-				[ '{{ entry[0] }}' , {{ entry[1] }} ],
+				[ '{{ entry[0] }}' , {{ entry[1] }}, {{ entry[1] }} ],
 				{% endfor %}
 				]);
 			var options = {
@@ -19,6 +19,7 @@
 				sliceVisibilityThreshold: 1,
 				legend: { position: 'bottom' }
 			};
+			bars: 'horizontal'
 			var chart = new google.visualization.BarChart(document.getElementById('bar_chart'));
 			chart.draw(data, options);
 		}
