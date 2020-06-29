@@ -47,7 +47,7 @@ def bar_chart():
 
 @application.route('/scatter_chart', methods=["POST"])
 def scatter_chart():
-	sql ="select t.ranges as magnitudes, count(*) as occurences from (select case when mag >= 0 and mag < 1 then 0 when mag >= 1 and mag < 2 then 1 when mag >= 2 and mag < 3 then 2 when mag >= 3 and mag < 4 then 3 when mag >= 4 and mag < 5 then 4 when mag >= 5 and mag < 6 then 5 when mag >= 6 and mag < 7 then 6 when mag >= 7 and mag < 8 then 7 when mag >= 8 and mag < 9 then 8 when mag >= 9 and mag < 10 then 9 else -1 end as ranges from database1.quake_data) t group by t.ranges order by magnitudes;"
+	sql ='SELECT mag, depth FROM quake_data order by "mag" DESC limit 100'
 	cur = conn.cursor()
 	cur.execute(sql)
 
