@@ -1,0 +1,24 @@
+<h1>3)</h1>
+
+Number of queries = {{ query_count }}<br>
+Cache = {{ "Yes" if use_cache else "No" }}<br>
+<br>
+Execution time = {{ execution_time }}<br>
+<br>
+{% if result == 0 %}
+	<p>No ouptput</p>
+{% else%}
+	
+
+	<table>
+	<tr>
+		<th>Place</th>
+	</tr>
+	{% for item in result %}
+		<tr>
+			<td>{{ item }}</td>
+		</tr>
+	{% endfor %}
+	</table>
+
+{% endif %}

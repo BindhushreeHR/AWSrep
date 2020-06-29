@@ -1,0 +1,60 @@
+{% for item in deets %}
+<h1>{{ item }}</h1>
+{% endfor %}
+<br>
+
+<style type="text/css">
+table, th, td {
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+</style>
+
+<h1>Inertia</h1>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+  google.charts.load('current', {'packages':['corechart']});
+  google.charts.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+      ['No of clusters', 'Inertia'],
+      {% for i in distortions %}
+			[ {{ i[0] }} , {{ i[1] }}],
+		{% endfor%}
+    ]);
+
+    var options = {
+      title: 'Plot of No of clusters v Inertia',
+		width: 1200,
+		hAxis: {
+			title: 'No of clusters',
+		},
+		vAxis: {
+			title: 'Inertia',
+		},
+      legend: { position: 'bottom' }
+    };
+
+    var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+    chart.draw(data, options);
+  }
+</script>
+<div id="curve_chart" style="width: 900px; height: 500px"></div>
+<br>
+
+<table>
+	<tr>
+		<th>No of clusters</th>
+		<th>Inertia</th>
+	</tr>
+	{% for item in distortions %}
+	<tr>
+		<td>{{ item[0] }}</td>
+		<td>{{ item[1] }}</td>
+	</tr>
+	{% endfor %}
+</table>
+<br>

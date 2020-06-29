@@ -1,0 +1,34 @@
+<h1>Sai Pranathi Polisetti</h1>
+<h1>1001728199</h1>
+<br>
+
+
+<br>
+Execution time = {{ execution_time }}ms<br>
+<br>
+{% if result == 0 %}
+	<p>No ouptput</p>
+{% else%}
+	
+
+	<table>
+	<tr>
+		<th>Volcano Name</th>
+		<th>Volcano lat</th>
+		<th>Volcano long</th>
+		<th>Earthquake lat</th>
+		<th>Earthquake long</th>
+		
+	</tr>
+	{% for item in result %}
+		<tr>
+			<td>{{ item[0]}}</td>
+			<td>{{ item[1]}}</td>
+			<td>{{ item[2]}}</td>
+			<td>{{ item[3]}}</td>
+			<td>{{ item[4]}}</td>
+		</tr>
+	{% endfor %}
+	</table>
+
+{% endif %}

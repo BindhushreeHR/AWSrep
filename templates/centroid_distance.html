@@ -1,0 +1,28 @@
+{% for item in deets %}
+<h1>{{ item }}</h1>
+{% endfor %}
+<br>
+
+<style type="text/css">
+table, th, td {
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+</style>
+
+<h1>Distances between centroids</h1>
+<table>
+	<tr>
+		<th>From</th>
+		<th>To</th>
+		<th>Distance</th>
+	</tr>
+	{% for item in distance_table %}
+	<tr>
+		<td>{{ item[0] }}</td>
+		<td>{{ item[1] }}</td>
+		<td>{{ item[2] }}</td>
+	</tr>
+	{% endfor %}
+</table>
+<br>
