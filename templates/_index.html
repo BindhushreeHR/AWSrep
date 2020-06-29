@@ -1,0 +1,78 @@
+{% for item in deets %}
+<h1>{{ item }}</h1>
+{% endfor %}
+<br>
+
+<h1>K-Means with encoding of non-numeric values</h1>
+<form action="/cluster" method="post">
+	<label>No of Clusters: </label>
+	<input type="number" name="clusterno" required><br>
+	<label>Column 1: </label>
+	<select name="column1">
+		<option value="8">Fare</option>
+		<option value="4">Age</option>
+		<option value="1">Survived</option>
+		<option value="9">Cabin</option>
+		<option value="3">Sex</option>
+	</select><br>
+	<label>Column 2: </label>
+	<select name="column2">
+		<option value="8">Fare</option>
+		<option value="4">Age</option>
+		<option value="1">Survived</option>
+		<option value="9">Cabin</option>
+		<option value="3">Sex</option>
+	</select><br>
+	<input type="submit" value="Submit">
+</form>
+<br>
+
+<h1>Distance between clusters</h1>
+<form action="/centroid_distance" method="post">
+	<label>No of Clusters: </label>
+	<input type="number" name="clusterno" required><br>
+	<label>Column 1: </label>
+	<select name="column1">
+		<option value="8">Fare</option>
+		<option value="4">Age</option>
+		<option value="1">Survived</option>
+		<option value="9">Cabin</option>
+		<option value="3">Sex</option>
+	</select><br>
+	<label>Column 2: </label>
+	<select name="column2">
+		<option value="8">Fare</option>
+		<option value="4">Age</option>
+		<option value="1">Survived</option>
+		<option value="9">Cabin</option>
+		<option value="3">Sex</option>
+	</select><br>
+	<input type="submit" value="Submit">
+</form>
+<br>
+
+<h1>How tightly packed clusters are</h1>
+<form action="/inertia" method="post">
+	<label>No of Clusters: </label>
+	<input type="number" name="clusterno" required><br>
+	<label>Column 1: </label>
+	<select name="column1">
+		<option value="8">Fare</option>
+		<option value="4">Age</option>
+		<option value="1">Survived</option>
+		<option value="9">Cabin</option>
+		<option value="3">Sex</option>
+	</select><br>
+	<label>Column 2: </label>
+	<select name="column2">
+		<option value="8">Fare</option>
+		<option value="4">Age</option>
+		<option value="1">Survived</option>
+		<option value="9">Cabin</option>
+		<option value="3">Sex</option>
+	</select><br>
+	<input type="submit" value="Submit">
+</form>
+<br>
+
+<img src="{{url_for('static', filename='twitter.png')}}" />

@@ -7,12 +7,22 @@ from collections import Counter
 
 application = Flask(__name__)
 
-deets = ["Yash Bardapurkar", "1001731650"]
+deets = ["Bindhu Shree Hadya Ravi", "1001699836"]
 options = { 8: 'fare', 4: 'age', 1: 'survived', 9: 'cabin', 3: 'sex', }
 
+# default
 @application.route('/', methods=["GET"])
 def hello_world():
-	return render_template('index.html', deets=deets)
+	# return render_template('index.html', result=obj)
+	return render_template('index.html')
+
+@application.route('/line_chart', methods=["POST"])
+def line_chart():
+	sql = 'SELECT substring(time1, 1, 10) as date, count(*) as occurences from quakes group by substring(time1, 1, 10) order by date'
+	cursor = connect.cursor()
+	cursor.execute(sql)
+
+	return render_template('line_chart.html', result=cursor.fetchall())
 
 
 @application.route('/cluster', methods=["POST"])
