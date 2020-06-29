@@ -5,15 +5,15 @@
         google.charts.setOnLoadCallback(drawChart);
         function drawChart() {
             var data = google.visualization.arrayToDataTable([
-                ['Magnitude', 'Occurrences', { role: 'annotation' },{ role: 'style' }],
+                ['Population', 'Partitions', { role: 'annotation' },{ role: 'style' }],
                 {% for entry in result %}
                 [ '{{ entry[0] }} to {{ entry[0] + inr }}' , {{ entry[1] }}, {{ entry[1] }}, '#{{ entry[1] }}'  ],
                 {% endfor %}
                 ]);
             var options = {
-                title: 'Occurrence of Earthquakes by Magnitude',
-                vAxis: {title: 'Magnitude'},
-                hAxis: {title: 'Occurrences'},
+                title: 'Population Partition',
+                vAxis: {title: 'Population in Millions'},
+                hAxis: {title: 'Partitions'},
                 width: 1200,
                 sliceVisibilityThreshold: 1,
                 legend: { position: 'bottom' }
