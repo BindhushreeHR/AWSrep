@@ -26,6 +26,20 @@ def line_chart():
 	return render_template('line_chart.html', result=cur.fetchall())
 
 
+@application.route('/pieq_chart', methods=["POST"])
+def pieq_chart():
+	r1 = request.form["r1"]
+	r2 = request.form["r2"]
+	year = "y"+request.form["year"]
+	sql = """select State , {} from sp where {} between {} and {}""".format(year,year,r1,r2)
+	print(sql)
+	cursor = connect.cursor()
+	cursor.execute(sql)
+	#print(cursor.fetchone())
+	
+	return render_template('pieq_chart.html', result=cursor.fetchall())
+    
+
 @application.route('/barq_chart', methods=["POST"])
 def barq_chart():
     partition = request.form["partition"]
