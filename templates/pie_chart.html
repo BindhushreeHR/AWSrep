@@ -13,18 +13,17 @@
 				]);
 			var options = {
 				title: 'Occurrence of Earthquakes by Magnitude',
-				vAxis: {title: 'Magnitude'},
-				hAxis: {title: 'Occurrences'},
 				width: 1200,
-				legend: { position: 'bottom' }
+				sliceVisibilityThreshold: 0,
+				legend: 'labeled'
 			};
-			var chart = new google.visualization.LineChart(document.getElementById('line_chart'));
+			var chart = new google.visualization.PieChart(document.getElementById('pie_chart'));
 			chart.draw(data, options);
 		}
 	</script>
 </head>
 <body>
-	<h1>********** Line chart **********</h1>
-	<div id="line_chart" style="width: 900px; height: 500px"></div>
+	<h1>********** Pie chart **********</h1>
+	<div id="pie_chart" style="width: 900px; height: 500px"></div>
 </body>
 </html>
