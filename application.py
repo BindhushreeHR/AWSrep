@@ -42,7 +42,7 @@ def pieq_chart():
 
 @application.route('/barq_chart', methods=["POST"])
 def barq_chart():
-    partition = request.form["partition"]
+    partition = request.form["part"]
     year = request.form["year"]
     year_s = "y"+str(year)
     sql1 = "select MAX({}) from sp;".format(year_s)
