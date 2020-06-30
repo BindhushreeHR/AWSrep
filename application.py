@@ -28,8 +28,8 @@ def line_chart():
 
 @application.route('/pieq_chart', methods=["POST"])
 def pieq_chart():
-	r1 = request.form["r1"]
-	r2 = request.form["r2"]
+	r1 = request.form["r1"]*100000
+	r2 = request.form["r2"]*100000
 	year = "y"+request.form["year"]
 	sql = """select State , {} from sp where {} between {} and {}""".format(year,year,r1,r2)
 	print(sql)
