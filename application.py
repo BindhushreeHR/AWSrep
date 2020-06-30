@@ -127,9 +127,9 @@ def scatter_chart():
 	year1 = request.form['year1']
 	year2 = request.form['year2']
 	name = request.form['name']
-	sql = 'SELECT * from sp where Name =' +name+ ''
+	sql = 'SELECT * from sp'
 	
-	cur = conn.cursor()
+	cur = connect.cursor()
 	cur.execute(sql)
 
 	return render_template('scatter_chart.html', result=cur.fetchall())
