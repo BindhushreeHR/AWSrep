@@ -5,6 +5,7 @@ import numpy as np
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import LabelEncoder
 from collections import Counter
+import requests
 
 application = Flask(__name__)
 
