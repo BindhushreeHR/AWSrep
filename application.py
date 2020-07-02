@@ -17,7 +17,8 @@ options = { 8: 'fare', 4: 'age', 1: 'survived', 9: 'cabin', 3: 'sex', }
 def hello_world():
 	# return render_template('index.html', result=obj)
 	ip = requests.get('https://checkip.amazonaws.com').text.strip()
-    print(ip)
+	print(ip)
+	
 	return render_template('index.html', ipaddr=ip)
 
 @application.route('/line_chart', methods=["POST"])
