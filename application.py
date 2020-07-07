@@ -13,13 +13,13 @@ deets = ["Bindhu Shree Hadya Ravi", "1001699836"]
 options = { 8: 'fare', 4: 'age', 1: 'survived', 9: 'cabin', 3: 'sex', }
 
 # default
-@application.route('/', methods=["GET"])
-def hello_world():
-	# return render_template('index.html', result=obj)
-	ip = requests.get('https://checkip.amazonaws.com').text.strip()
-	print(ip)
-	
-	return render_template('index.html', ipaddr=ip)
+# @application.route('/', methods=["GET"])
+# def hello_world():
+# 	# return render_template('index.html', result=obj)
+# 	ip = requests.get('https://checkip.amazonaws.com').text.strip()
+# 	print(ip)
+# 	
+# 	return render_template('index.html', ipaddr=ip)
 
 @application.route('/line_chart', methods=["POST"])
 def line_chart():
@@ -29,7 +29,93 @@ def line_chart():
 
 	return render_template('line_chart.html', result=cur.fetchall())
 	
+@application.route('/', methods=["GET"])
+def hello_world():
+    ip = requests.get('https://checkip.amazonaws.com').text.strip()
+    print(ip)
+    datehere = datetime.datetime.now()
+    print(datehere)
+
+ 
+
+    return render_template('index.html', result = 0, datehere= datehere)
+
+ 
+
+
+@application.route('/calc', methods=["POST"])
+def calc():
+    datehere = datetime.datetime.now()
+    print(datehere)
+    d1 = request.form["numberuno"]
+    d2 = request.form["numberdo"]
+    op = request.form["op"]
+    
+    result = 0
+    
+    if d1 is "" :
+        print("here1")
+        result = "invalid"
+        return render_template('index.html', result = result, datehere= datehere)
+    
+    if d2 is "" :
+        print("here2")
+        result = "invalid"
+        return render_template('index.html', result = result, datehere= datehere)
+    
+    if op is "" or (op != "+" and op != "*" and op != "/" and op != "-" and op != "!" and op != "%") :
+        print("here3")
+        result = "invalid"
+        return render_template('index.html', result = result, datehere= datehere)
+    
+    if op == "+":
+        result = float(d1) + float(d2)
+        return render_template('index.html', result = result, datehere= datehere)
+    elif op == "*":
+        result = float(d1) * float(d2)
+        return render_template('index.html', result = result, datehere= datehere)
+    elif op == "-":
+        result = float(d1) - float(d2)
+        return render_template('index.html', result = result, datehere= datehere)
+    elif op == "/":
+        result = float(d1) / float(d2)
+        return render_template('index.html', result = result, datehere= datehere)
+    elif op == "%":
+        result = float(d1) % float(d2)
+        return render_template('index.html', result = result, datehere= datehere)
+    elif op == "!":
+        result = math.factorial(float(d1))
+        return render_template('index.html', result = result, datehere= datehere)
+    
+    return render_template('index.html', result = result, datehere= datehere)
 	
+@application.route('/cal2', methods=["POST"])
+def stringvalue2():
+	clusterno = int(request.form['number1'])
+	r1 = int(request.form['number1'])
+	r2 = int(request.form['number2'])
+
+	column1 = int(request.form['column1'])
+	
+	
+	return render_template('index.html', result=r3, errm=err)
+
+@application.route('/fact', methods=["POST"])
+def fact():
+	r1 = int(request.form['number1'])
+	#print(r1)
+	#r2 = int(request.form['number2'])
+	err = ''
+	r3 = 0
+	
+	if r2 <= 0:
+		err = "Enter number > 0"
+	else:
+		for i in range (1,int(n)+1):
+   			factorial = factorial * i
+
+	return render_template('index.html', result=factorial, errm=err)
+		
 @application.route('/div', methods=["POST"])
 def div():
 	r1 = int(request.form['number1'])
