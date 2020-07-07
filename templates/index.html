@@ -1,3 +1,6 @@
+
+
+
 <h1>Bindhu Shree Hadya Ravi</h1>
 <h1>1001699836</h1>
 <br>
@@ -10,15 +13,63 @@ var dt = new Date();
 document.getElementById("datetime").innerHTML = dt.toLocaleString();
 </script>
 
+*******************
+<h1 style="color:red"> 
+ERROR = {{ errm }}
+</h1>
+******************* 
+*******************
+<h1 style="color:blue"> 
+ANSWER = {{ result }}
+</h1>
+*******************
+<br>
 
-<h3> AWS </h3>
-<img src={{ "https://elasticbeanstalk-us-east-2-484876011790.s3.us-east-2.amazonaws.com/aws.png" }}  height="200px">
+
+
+<h3> Addition </h3>
+<form action="/add" method="post">
+	<label>Number1:</label>
+	<input type="number" name="number1" required><br>
+	<label>Number2:</label>
+	<input type="number" name="number2" required><br>
+	<input type="submit" value="Submit">
+</form>
 
 <br>
-<h3> MUL </h3>
 
-<img src={{ "https://elasticbeanstalk-us-east-2-484876011790.s3.us-east-2.amazonaws.com/mul.jpg" }}  height="200px">
 
+<h3> Division </h3>
+<form action="/div" method="post">
+	<label>Number1:</label>
+	<input type="number" name="number1" required><br>
+	<label>Number2:</label>
+	<input type="number" name="number2" required><br>
+	<input type="submit" value="Submit">
+</form>
+
+<br>
+
+<h3> Multiplication </h3>
+<form action="/mul" method="post">
+	<label>Number1:</label>
+	<input type="number" name="number1" required><br>
+	<label>Number2:</label>
+	<input type="number" name="number2" required><br>
+	<input type="submit" value="Submit">
+</form>
+
+<br>
+
+
+<h3> Modulus </h3>
+<form action="/mod" method="post">
+	<label>Number1:</label>
+	<input type="number" name="number1" required><br>
+	<label>Number2:</label>
+	<input type="number" name="number2" required><br>
+	<input type="submit" value="Submit">
+</form>
 
 <br>
 

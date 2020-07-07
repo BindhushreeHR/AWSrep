@@ -28,6 +28,63 @@ def line_chart():
 	cur.execute(sql)
 
 	return render_template('line_chart.html', result=cur.fetchall())
+	
+	
+@application.route('/div', methods=["POST"])
+def div():
+	r1 = int(request.form['number1'])
+	#print(r1)
+	r2 = int(request.form['number2'])
+	err = ''
+	r3 = 0
+	
+	if r2 == 0:
+		err = "Divide by 0"
+	else:
+		r3 = r1/r2
+
+	return render_template('index.html', result=r3, errm=err)
+	
+	
+@application.route('/add', methods=["POST"])
+def add():
+	r1 = int(request.form['number1'])
+	#print(r1)
+	r2 = int(request.form['number2'])
+	#print(r2)
+	r3 = r1+r2
+	err = ''
+	#print(r3)
+
+	return render_template('index.html', result=r3, errm=err)
+	
+@application.route('/mul', methods=["POST"])
+def mul():
+	r1 = int(request.form['number1'])
+	#print(r1)
+	r2 = int(request.form['number2'])
+	#print(r2)
+	r3 = r1*r2
+	err = ''
+	#print(r3)
+
+	return render_template('index.html', result=r3, errm=err)
+	
+@application.route('/mod', methods=["POST"])
+def mod():
+	r1 = int(request.form['number1'])
+	#print(r1)
+	r2 = int(request.form['number2'])
+	err = ''
+	r3 = 0
+	if r2 == 0:
+		err = "Modulo by 0"
+	else:
+		r3 = r1%r2
+	#print(r2)
+	#print(r3)
+
+	return render_template('index.html', result=r3, errm=err)
 
 
 @application.route('/pieq_chart', methods=["POST"])
