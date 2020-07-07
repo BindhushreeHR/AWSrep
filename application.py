@@ -50,6 +50,7 @@ def calc():
     d1 = request.form["numberuno"]
     d2 = request.form["numberdo"]
     op = request.form["op"]
+    err = ''
     
     result = 0
     
@@ -70,24 +71,34 @@ def calc():
     
     if op == "+":
         result = float(d1) + float(d2)
-        return render_template('index.html', result = result, datehere= datehere)
+        return render_template('index.html', result = result, datehere= datehere, errm=err)
     elif op == "*":
         result = float(d1) * float(d2)
-        return render_template('index.html', result = result, datehere= datehere)
+        return render_template('index.html', result = result, datehere= datehere, errm=err)
     elif op == "-":
         result = float(d1) - float(d2)
-        return render_template('index.html', result = result, datehere= datehere)
+        return render_template('index.html', result = result, datehere= datehere, errm=err)
     elif op == "/":
-        result = float(d1) / float(d2)
-        return render_template('index.html', result = result, datehere= datehere)
+    	if d2 == 0:
+    		err = "Divide by 0"
+    	else:
+    		result = float(d1) / float(d2)
+    	return render_template('index.html', result = result, datehere= datehere, errm=err)
     elif op == "%":
-        result = float(d1) % float(d2)
-        return render_template('index.html', result = result, datehere= datehere)
+    	print(d2)
+    	if d2 == 0:
+    		err = "Modulus by 0"
+    	else:
+    		result = float(d1) % float(d2)
+    	return render_template('index.html', result = result, datehere= datehere, errm=err)
     elif op == "!":
-        result = math.factorial(float(d1))
-        return render_template('index.html', result = result, datehere= datehere)
+    	if d1 <= 0:
+    		err = "Less than or = 0"
+    	else:
+    		result = math.factorial(float(d1))
+    	return render_template('index.html', result = result, datehere= datehere, errm=err)
     
-    return render_template('index.html', result = result, datehere= datehere)
+    return render_template('index.html', result = result, datehere= datehere, errm=err)
 	
 @application.route('/cal2', methods=["POST"])
 def stringvalue2():
