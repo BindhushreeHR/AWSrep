@@ -83,14 +83,10 @@ def top_words2():
 				#print(word)
 				word = word.lower()
 				result3.append(word)
-				
-	result2 = pd.DataFrame(list(result2))
-	result2[0] = result2[0].str.strip('\r')
-	stoplist = list(result2[0])
 
 
-	for word in stoplist:
-		counts[word] = stoplist.count(word)
+	for word in result3:
+		counts[word] = result3.count(word)
 	
 	print("OCCURRANCES")	
 	print(counts)
@@ -103,7 +99,7 @@ def top_words2():
 	
 	freq = list(a.keys())[:num]
 	
-	print("TOP 20 words")
+	print("Least N words")
 	print(freq)
 
 	return render_template('top.html', result = freq, deets=deets)
