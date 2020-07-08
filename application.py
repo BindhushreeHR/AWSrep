@@ -45,6 +45,13 @@ def hello_world():
     	reader = csv.reader(myFile, delimiter='.', quoting=csv.QUOTE_NONE)
     	for row in reader:
     		print(row)
+    		
+    		
+    print("2 Sentences:")
+    with open('csv2.csv', newline='') as myFile:
+    	reader2 = csv.reader(myFile, delimiter=',', quoting=csv.QUOTE_NONE)
+    	for row2 in reader2:
+    		print(row2)
         
 
     return render_template('index.html', result = 0)
