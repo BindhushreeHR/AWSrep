@@ -125,6 +125,18 @@ def top_words4():
 	return render_template('index.html', result = r, deets=deets)
 	
 	
+@application.route('/bot2', methods=["POST"])
+def top_words49():
+	name = request.form["name"]
+	r = []
+	lines = xb("Alamo")
+	for l in lines:
+		if name in l:
+			#print("here")
+			r.append(l)
+	
+	return render_template('index.html', result = r, deets=deets)
+	
 @application.route('/top2', methods=["POST"])
 def top_words2():
 	num = int(request.form["num"])
