@@ -6,6 +6,7 @@ from sklearn.cluster import KMeans
 from sklearn.preprocessing import LabelEncoder
 from collections import Counter
 import requests
+import csv
 
 application = Flask(__name__)
 
@@ -31,14 +32,22 @@ def line_chart():
 	
 @application.route('/', methods=["GET"])
 def hello_world():
-    ip = requests.get('https://checkip.amazonaws.com').text.strip()
-    print(ip)
-    datehere = datetime.datetime.now()
-    print(datehere)
+    f = open("try.txt", "r")
+    
+    f1 = f.readlines()
+    for x in f1:
+    	print(x)
+    	
+    f.close();
+    
+    print("Sentences:")
+    with open('csv1.csv', newline='') as myFile:
+    	reader = csv.reader(myFile, delimiter='.', quoting=csv.QUOTE_NONE)
+    	for row in reader:
+    		print(row)
+        
 
- 
-
-    return render_template('index.html', result = 0, datehere= datehere)
+    return render_template('index.html', result = 0)
 
  
 
@@ -50,7 +59,6 @@ def calc():
     d1 = request.form["numberuno"]
     d2 = request.form["numberdo"]
     op = request.form["op"]
-    err = ''
     
     result = 0
     
@@ -71,34 +79,24 @@ def calc():
     
     if op == "+":
         result = float(d1) + float(d2)
-        return render_template('index.html', result = result, datehere= datehere, errm=err)
+        return render_template('index.html', result = result, datehere= datehere)
     elif op == "*":
         result = float(d1) * float(d2)
-        return render_template('index.html', result = result, datehere= datehere, errm=err)
+        return render_template('index.html', result = result, datehere= datehere)
     elif op == "-":
         result = float(d1) - float(d2)
-        return render_template('index.html', result = result, datehere= datehere, errm=err)
+        return render_template('index.html', result = result, datehere= datehere)
     elif op == "/":
-    	if d2 == 0:
-    		err = "Divide by 0"
-    	else:
-    		result = float(d1) / float(d2)
-    	return render_template('index.html', result = result, datehere= datehere, errm=err)
+        result = float(d1) / float(d2)
+        return render_template('index.html', result = result, datehere= datehere)
     elif op == "%":
-    	print(d2)
-    	if d2 == 0:
-    		err = "Modulus by 0"
-    	else:
-    		result = float(d1) % float(d2)
-    	return render_template('index.html', result = result, datehere= datehere, errm=err)
+        result = float(d1) % float(d2)
+        return render_template('index.html', result = result, datehere= datehere)
     elif op == "!":
-    	if d1 <= 0:
-    		err = "Less than or = 0"
-    	else:
-    		result = math.factorial(float(d1))
-    	return render_template('index.html', result = result, datehere= datehere, errm=err)
+        result = math.factorial(float(d1))
+        return render_template('index.html', result = result, datehere= datehere)
     
-    return render_template('index.html', result = result, datehere= datehere, errm=err)
+    return render_template('index.html', result = result, datehere= datehere)
 	
 @application.route('/cal2', methods=["POST"])
 def stringvalue2():
