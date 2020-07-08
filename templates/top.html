@@ -1,0 +1,25 @@
+{% for item in deets %}
+<h1>{{ item }}</h1>
+{% endfor %}
+<br>
+
+<p>Date Time: <span id="datetime"></span></p>
+
+<script>
+var dt = new Date();
+document.getElementById("datetime").innerHTML = dt.toLocaleString();
+</script>
+
+******************* 
+*******************
+<h1 style="color:blue"> 
+ANSWER = {{ result }}
+</h1>
+*******************
+******************* 
+<br>
+
+<br>
+<img src="https://elasticbeanstalk-us-east-2-484876011790.s3.us-east-2.amazonaws.com/mul.jpg" width=1000px />
+<br>
+<br>

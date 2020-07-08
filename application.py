@@ -7,6 +7,7 @@ from sklearn.preprocessing import LabelEncoder
 from collections import Counter
 import requests
 import csv
+from collections import OrderedDict
 
 application = Flask(__name__)
 
@@ -32,32 +33,114 @@ def line_chart():
 	
 @application.route('/', methods=["GET"])
 def hello_world():
-    f = open("try.txt", "r")
-    
-    f1 = f.readlines()
-    for x in f1:
-    	print(x)
-    	
-    f.close();
-    
-    print("Sentences:")
-    with open('csv1.csv', newline='') as myFile:
-    	reader = csv.reader(myFile, delimiter='.', quoting=csv.QUOTE_NONE)
-    	for row in reader:
-    		print(row)
-    		
-    		
-    print("2 Sentences:")
-    with open('csv2.csv', newline='') as myFile:
-    	reader2 = csv.reader(myFile, delimiter=',', quoting=csv.QUOTE_NONE)
-    	for row2 in reader2:
-    		print(row2)
-        
+	# print("Every line in a file:")
+# 	f = open("try.txt", "r")
+# 	f1 = f.readlines()
+# 	for x in f1:
+# 		print(x)
+# 	f.close();
+# 	
+#  	print("Sentences with . as delim:")
+#  	result2 = []
+#  	with open('data.txt', newline='') as myFile:
+#  		reader = csv.reader(myFile, delimiter='.', quoting=csv.QUOTE_NONE)
+#  		for row in reader:
+#  			print(row)
+#  			result2.append(row)
+#  			
+#  	print(len(result2))
+#  			
+  	return render_template('index.html', result = 0, deets=deets)
+# 			
+# 			
+# 	print("Sentences with , as delim:")
+# 	with open('csv2.csv', newline='') as myFile:
+# 		reader2 = csv.reader(myFile, delimiter=',', quoting=csv.QUOTE_NONE)
+# 		for row2 in reader2:
+# 			print(row2)
+# 			
+# 	
+# 	print("Words in a file:")
+# 	with open('csv3.csv','r') as file:
+# 		for line in file:
+# 			for word in line.split():
+# 				print(word)
+	
 
-    return render_template('index.html', result = 0)
+@application.route('/top', methods=["POST"])
+def top_words():
+	num = int(request.form["num"])
+	result2 = []
+	count = []
+	found = []
+	counts = dict()
+	
+	print("Words in a file:")
+	with open('data.txt','r') as file:
+		for line in file:
+			for word in line.split():
+				#print(word)
+				word = word.lower()
+				result2.append(word)
 
- 
 
+	for word in result2:
+		counts[word] = result2.count(word)
+	
+	print("OCCURRANCES")	
+	print(counts)
+
+	a = OrderedDict(sorted(counts.items(), key=lambda x: x[1], reverse=True))
+	
+	#print(a)
+	#a = a[:20]
+	#print(a)
+	
+	freq = list(a.keys())[:num]
+	
+	print("TOP 20 words")
+	print(freq)
+
+	return render_template('top.html', result = freq, deets=deets)
+	
+@application.route('/word', methods=["POST"])
+def word_search():
+	words = request.form["word"]
+	num = int(request.form["num"])
+	result2 = []
+	count = []
+	found = []
+	counts = dict()
+	print(words)
+	print("Words in a file:")
+	with open('data.txt','r') as file:
+		for line in file:
+			for word in line.split():
+				#print(word)
+				word = word.lower()
+				result2.append(word)
+				
+	for i in range(0,len(result2)):
+		if result2[i] == words:
+			print("********* Found")
+			print(result2[i])
+			found.append(result2[i+num])
+
+	for word in result2:
+		counts[word] = result2.count(word)
+	
+	print("OCCURRANCES")	
+	print(counts)
+	
+	a = OrderedDict(sorted(counts.items(), key=lambda x: x[1], reverse=True))
+	
+	freq = list(a.keys())[:num]
+	
+	print("TOP words")
+	print(freq)
+	
+	return render_template('index.html', result = found, deets=deets)
+	
 
 @application.route('/calc', methods=["POST"])
 def calc():

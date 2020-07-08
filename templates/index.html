@@ -1,10 +1,7 @@
-
-
-
-<h1>Bindhu Shree Hadya Ravi</h1>
-<h1>1001699836</h1>
+{% for item in deets %}
+<h1>{{ item }}</h1>
+{% endfor %}
 <br>
-<H3>Calculator</h3>
 
 <p>Date Time: <span id="datetime"></span></p>
 
@@ -14,6 +11,7 @@ document.getElementById("datetime").innerHTML = dt.toLocaleString();
 </script>
 
 *******************
+******************* 
 <h1 style="color:red"> 
 ERROR = {{ errm }}
 </h1>
@@ -23,54 +21,28 @@ ERROR = {{ errm }}
 ANSWER = {{ result }}
 </h1>
 *******************
+******************* 
 <br>
 
 
 
-<h3> Addition </h3>
-<form action="/add" method="post">
-	<label>Number1:</label>
-	<input type="number" name="number1" required><br>
-	<label>Number2:</label>
-	<input type="number" name="number2" required><br>
+<h3> Top N words </h3>
+<form action="/top" method="post">
+	<label>Number:</label>
+	<input type="number" name="num" required><br>
 	<input type="submit" value="Submit">
 </form>
-
 <br>
 
-
-<h3> Division </h3>
-<form action="/div" method="post">
-	<label>Number1:</label>
-	<input type="number" name="number1" required><br>
-	<label>Number2:</label>
-	<input type="number" name="number2" required><br>
+<h3> Nth word </h3>
+<form action="/word" method="post">
+	<label>Enter the word to search</label>
+	<input type="text" name="word" required><br>
+	<label>Number:</label>
+	<input type="number" name="num" required><br>
 	<input type="submit" value="Submit">
 </form>
-
 <br>
-
-<h3> Multiplication </h3>
-<form action="/mul" method="post">
-	<label>Number1:</label>
-	<input type="number" name="number1" required><br>
-	<label>Number2:</label>
-	<input type="number" name="number2" required><br>
-	<input type="submit" value="Submit">
-</form>
-
+<img src="https://elasticbeanstalk-us-east-2-484876011790.s3.us-east-2.amazonaws.com/mul.jpg" width=1000px />
 <br>
-
-
-<h3> Modulus </h3>
-<form action="/mod" method="post">
-	<label>Number1:</label>
-	<input type="number" name="number1" required><br>
-	<label>Number2:</label>
-	<input type="number" name="number2" required><br>
-	<input type="submit" value="Submit">
-</form>
-
-<br>
-
 <br>
