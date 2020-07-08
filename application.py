@@ -91,7 +91,7 @@ def all():
 	stoplist = list(result2[0])
     
 	#print(result3)
-	print(stoplist)
+	#print(stoplist)
 	for i in stoplist:
 		#print(i)
 		
@@ -103,7 +103,7 @@ def all():
 # 			if i == j:
 			result4.append(i)
 	
-	print(result4)
+	#print(result4)
 	
 # 	counts = dict()
 	
