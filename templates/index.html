@@ -3,18 +3,14 @@
 {% endfor %}
 <br>
 
-<p>Date Time: <span id="datetime"></span></p>
 
-<script>
-var dt = new Date();
-document.getElementById("datetime").innerHTML = dt.toLocaleString();
-</script>
-
+<!-- 
 *******************
 ******************* 
 <h1 style="color:red"> 
 ERROR = {{ errm }}
 </h1>
+ -->
 ******************* 
 *******************
 <h1 style="color:blue"> 
@@ -25,6 +21,13 @@ ANSWER = {{ result }}
 <br>
 
 
+<h3> All Spanish Words</h3>
+<form action="/all" method="post">
+	<input type="submit" value="Submit">
+</form>
+<br>
+
+<!-- 
 
 <h3> Top N words </h3>
 <form action="/top" method="post">
@@ -43,6 +46,7 @@ ANSWER = {{ result }}
 	<input type="submit" value="Submit">
 </form>
 <br>
-<img src="https://elasticbeanstalk-us-east-2-484876011790.s3.us-east-2.amazonaws.com/mul.jpg" width=1000px />
+ -->
+<!-- <img src="https://elasticbeanstalk-us-east-2-484876011790.s3.us-east-2.amazonaws.com/mul.jpg" width=1000px /> -->
 <br>
 <br>
