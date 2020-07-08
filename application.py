@@ -68,6 +68,46 @@ def hello_world():
 # 				print(word)
 	
 
+@application.route('/top2', methods=["POST"])
+def top_words2():
+	num = int(request.form["num"])
+	result2 = []
+	count = []
+	found = []
+	counts = dict()
+	
+	print("Words in a file:")
+	with open('Alamo.txt','r') as file:
+		for line in file:
+			for word in line.split():
+				#print(word)
+				word = word.lower()
+				result3.append(word)
+				
+	result2 = pd.DataFrame(list(result2))
+	result2[0] = result2[0].str.strip('\r')
+	stoplist = list(result2[0])
+
+
+	for word in stoplist:
+		counts[word] = stoplist.count(word)
+	
+	print("OCCURRANCES")	
+	print(counts)
+
+	a = OrderedDict(sorted(counts.items(), key=lambda x: x[1], reverse=False))
+	
+	#print(a)
+	#a = a[:20]
+	#print(a)
+	
+	freq = list(a.keys())[:num]
+	
+	print("TOP 20 words")
+	print(freq)
+
+	return render_template('top.html', result = freq, deets=deets)
+	
 @application.route('/all', methods=["POST"])
 def all():
 	result4 = []
