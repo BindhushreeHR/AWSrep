@@ -9,6 +9,8 @@ import requests
 import csv
 from collections import OrderedDict
 import pandas as pd
+from itertools import chain
+from glob import glob
 
 application = Flask(__name__)
 
@@ -67,7 +69,62 @@ def hello_world():
 # 			for word in line.split():
 # 				print(word)
 	
+@application.route('/str', methods=["POST"])
+def top_words20():
+	num = int(request.form["num"])
+	
+	
+	return render_template('top.html', result = freq, deets=deets)
+	
+	
+	
+	
+def xb(filename):
+    lines = set(chain.from_iterable(open(f, encoding='utf-8') for f in glob('./'+filename+".txt")))
+    lines = [line.lower() for line in lines]
+    
+    g = ""
+    for l in lines:
+#         print(type(l),l)
+        if ". " in l:
+            l = l.replace(". ", "\n")
+        if "." in l:
+            l = l.replace(".", "\n")
+        if "," in l:
+            l =  l.replace(",", " ")
+#         if "'" in l:
+#             l =  l.replace(",", " ")
+        g = g + l
+#     g.replace("  "," ")
 
+
+    with open(filename+'g.txt', 'w') as out:
+        out.writelines((g))
+         
+    #Read processed data
+#     lines = set(chain.from_iterable(open(f) for f in glob('./datag.txt')))
+    f = open(filename+'g.txt',"r")
+     
+    lines = f.readlines()
+    
+    return lines
+
+
+
+
+
+@application.route('/bot', methods=["POST"])
+def top_words4():
+	r = []
+	lines = xb("Alamo")
+	for l in lines:
+		if any(char.isdigit() for char in l):
+			print("here")
+			r.append(l)
+	
+	return render_template('index.html', result = r, deets=deets)
+	
+	
 @application.route('/top2', methods=["POST"])
 def top_words2():
 	num = int(request.form["num"])

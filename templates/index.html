@@ -2,7 +2,9 @@
 <h1>{{ item }}</h1>
 {% endfor %}
 <br>
-
+<h1 style="color:blue"> 
+MAIN APPLICATION PAGE
+</h1>
 
 <!-- 
 *******************
@@ -21,16 +23,30 @@ ANSWER = {{ result }}
 <br>
 
 
-<h3> All Spanish Words</h3>
+<h3> 6. All Spanish Words</h3>
 <form action="/all" method="post">
 	<input type="submit" value="Submit">
 </form>
 <br>
 
-<h3> Bottom N words </h3>
+<h3> 8. Bottom N words </h3>
 <form action="/top2" method="post">
 	<label>N value:</label>
 	<input type="number" name="num" required><br>
+	<input type="submit" value="Submit">
+</form>
+<br>
+
+<h3> 9. Sentences with Date/Number in it </h3>
+<form action="/bot" method="post">
+	<input type="submit" value="Submit">
+</form>
+<br>
+
+<h3> 10. Sentences with below string in it </h3>
+<form action="/str" method="post">
+	<label>String:</label>
+	<input type="name" name="name" required><br>
 	<input type="submit" value="Submit">
 </form>
 <br>
