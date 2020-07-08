@@ -71,7 +71,7 @@ def hello_world():
 @application.route('/top2', methods=["POST"])
 def top_words2():
 	num = int(request.form["num"])
-	result2 = []
+	result3 = []
 	count = []
 	found = []
 	counts = dict()
@@ -89,7 +89,7 @@ def top_words2():
 		counts[word] = result3.count(word)
 	
 	print("OCCURRANCES")	
-	print(counts)
+	#print(counts)
 
 	a = OrderedDict(sorted(counts.items(), key=lambda x: x[1], reverse=False))
 	
@@ -97,7 +97,7 @@ def top_words2():
 	#a = a[:20]
 	#print(a)
 	
-	freq = list(a.keys())[:num]
+	freq = list(a)[:num]
 	
 	print("Least N words")
 	print(freq)
