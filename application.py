@@ -112,6 +112,21 @@ def xb(filename):
 
 
 
+def nouns_f(lines, freq):
+    wo = []
+    for l in lines:
+        words = l.split(" ")
+        wo.append(words[1:])
+       
+    wo  = list(itertools.chain(*wo))
+    nouns = []
+    for w in wo:
+        if w.istitle():
+            w = w.strip("\n")
+            nouns.append(w)
+           
+    return nouns
+
 
 @application.route('/bot', methods=["POST"])
 def top_words4():
@@ -160,18 +175,18 @@ def top_words2():
 	print("OCCURRANCES")	
 	#print(counts)
 
-	a = OrderedDict(sorted(counts.items(), key=lambda x: x[1], reverse=False))
+	a = OrderedDict(sorted(counts.items(), key=lambda x: x[1], reverse=False)[:num])
 	
 	#print(a)
 	#a = a[:20]
 	#print(a)
 	
-	freq = list(a)[:num]
-	
-	print("Least N words")
-	print(freq)
+# 	freq = list(a)[:num]
+# 	
+# 	print("Least N words")
+# 	print(freq)
 
-	return render_template('top.html', result = freq, deets=deets)
+	return render_template('top.html', result = a, deets=deets)
 	
 @application.route('/all', methods=["POST"])
 def all():
@@ -202,6 +217,38 @@ def all():
 			result4.append(i)
 
 
+	return render_template('index.html', result=result4, deets=deets)
+	
+	
+@application.route('/all2', methods=["POST"])
+def all2():
+	result4 = []
+	sql = """select * from SpanishStopWords"""
+	print(sql)
+	cursor = connect.cursor()
+	cursor.execute(sql)
+	
+	result2=cursor.fetchall()
+	
+	result3 = []
+	with open('Alamo.txt','r') as file:
+		for line in file:
+			for word in line.split():
+				#print(word)
+				word = word.lower()
+				result3.append(word)
+				
+	result2 = pd.DataFrame(list(result2))
+	result2[0] = result2[0].str.strip('\r')
+	stoplist = list(result2[0])
+    
+	for prev, i, next in stoplist:
+		print(i)
+		
+		#if i in result3:
+			#result4.append(i-1)
+			#result4.append(i+1)
+			
 	return render_template('index.html', result=result4, deets=deets)
 	
 @application.route('/top', methods=["POST"])
